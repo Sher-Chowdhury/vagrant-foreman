@@ -9,7 +9,7 @@
       "ssh_username": "root",
       "ssh_password": "admin",
 	  "http_directory": "kickstart",
-      "ssh_wait_timeout": "1300s",
+      "ssh_wait_timeout": "1500s",
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
