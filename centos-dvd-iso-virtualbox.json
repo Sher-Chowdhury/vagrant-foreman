@@ -12,6 +12,7 @@
       "ssh_wait_timeout": "2000s",
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
+	  "guest_additions_mode": "attach" ,
       "shutdown_command": "shutdown now"
     }
   ],
