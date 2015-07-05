@@ -11,7 +11,7 @@
 	  "http_directory": "kickstart",
       "ssh_wait_timeout": "1700s",
 	  "boot_wait": "10s",
-	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
+	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.txt <enter>"	  ],
       "shutdown_command": "shutdown now"
     }
   ],
@@ -19,7 +19,9 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "setup_things.sh"
+      "script": "scripts/set-private-keys.sh"
     }
-  ]
+  ],
+
+  "post-processors": ["vagrant"]
 }
