@@ -9,10 +9,11 @@
       "ssh_username": "root",
       "ssh_password": "admin",
 	  "http_directory": "kickstart",
-      "ssh_wait_timeout": "2000s",
+      "ssh_wait_timeout": "3000s",
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
 	  "guest_additions_mode": "attach" ,
+	  "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "shutdown_command": "shutdown now"
     }
   ],
@@ -20,9 +21,17 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "scripts/set-private-keys.sh"
+      "scripts": [ 
+	    "scripts/set-private-keys.sh",
+		"scripts/disable-services.sh",
+	    "scripts/foreman-install.sh"
+	  ]
     }
+	
   ],
 
-  "post-processors": ["vagrant"]
+  "post-processors": [{
+    "type": "vagrant",
+    "output": "centos7.box"
+  }]
 }
