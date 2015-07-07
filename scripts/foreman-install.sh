@@ -55,5 +55,9 @@ echo "  "
 #https://www.google.co.uk/search?q=Make+sure+above+command+gives+the+same+output.+If+needed%2C+change+the+hostname+permanently+via+%27hostname%27+command&oq=Make+sure+above+command+gives+the+same+output.+If+needed%2C+change+the+hostname+permanently+via+%27hostname%27+command&aqs=chrome..69i57.246j0j7&sourceid=chrome&es_sm=122&ie=UTF-8
 
 
-foreman-installer
+foreman-installer \
+--foreman-admin-username=vagrant \
+--foreman-admin-password=vagrant
+
+
 puppet agent -t
