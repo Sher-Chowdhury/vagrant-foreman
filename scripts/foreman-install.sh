@@ -11,11 +11,38 @@ yum -y install epel-release http://yum.theforeman.org/releases/1.8/el7/x86_64/fo
 yum -y install foreman-installer
 
 
-echo "FACTER FQDN value is equal to:"
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+echo "FACTER FQDN VALUE IS EQUAL TO:"
 facter fqdn
 
-echo "HOSTNAME FQDN value is equal to:"
+echo "HOSTNAME FQDN VALUE IS EQUAL TO:"
 hostname -f
+
+
+hostname localhost.ordsvy.gov.uk
+
+
+echo "HOSTNAME FQDN VALUE IS NOW EQUAL TO:"
+hostname -f
+
+
+echo "CONTENT OF /ETC/HOSTS:"
+cat /etc/hosts
+
+
+echo "CONTENT OF /etc/sysconfig/network:"
+cat /etc/sysconfig/network
+
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
 
 # might need to permenantly change the hostname value using the "hostname" command. 
 # Make sure above command gives the same output. If needed, change the hostname permanently via 'hostname' command 
@@ -28,9 +55,5 @@ hostname -f
 #https://www.google.co.uk/search?q=Make+sure+above+command+gives+the+same+output.+If+needed%2C+change+the+hostname+permanently+via+%27hostname%27+command&oq=Make+sure+above+command+gives+the+same+output.+If+needed%2C+change+the+hostname+permanently+via+%27hostname%27+command&aqs=chrome..69i57.246j0j7&sourceid=chrome&es_sm=122&ie=UTF-8
 
 
-#sleep 120
-#echo "about to run the installer"
-#foreman-installer
-#sleep 120
-#echo "about to do the puppet run"
-#puppet agent -t
+foreman-installer
+puppet agent -t
