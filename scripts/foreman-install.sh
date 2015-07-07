@@ -23,7 +23,7 @@ echo "HOSTNAME FQDN VALUE IS EQUAL TO:"
 hostname -f
 
 
-hostname localhost.ordsvy.gov.uk
+hostname localhost.localdomain
 
 
 echo "HOSTNAME FQDN VALUE IS NOW EQUAL TO:"
