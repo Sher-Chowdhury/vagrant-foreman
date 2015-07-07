@@ -1,19 +1,12 @@
 #!/bin/sh
 
+# Mount the disk image
+mkdir /tmp/isomount
+mount -t iso9660 -o loop /root/VBoxGuestAdditions.iso /tmp/isomount
 
-echo " "
-echo " "
-echo " "
+# Install the drivers
+/tmp/isomount/VBoxLinuxAdditions.run
 
-mount
-
-
-echo " "
-echo " "
-echo " "
-echo " "
-
-
-#/run/media/root/VBOXADDITIONS*/VBoxLinuxAdditions.run
-`find /run/media/root/ -name *.run`
-#umount /dev/sr0
+# Cleanup
+umount isomount
+rm -rf isomount /root/VBoxGuestAdditions.iso
