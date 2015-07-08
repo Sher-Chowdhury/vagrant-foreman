@@ -23,9 +23,14 @@ echo "HOSTNAME FQDN VALUE IS EQUAL TO:"
 hostname -f
 
 
-hostname "localhost.`facter domain`"
+if [ -z `facter domain` ]; then
+  hostname "localhost.test"
+  echo "localhost.test" > /etc/hostname
+else
+  hostname "localhost.`facter domain`"
+  echo "localhost.`facter domain`" > /etc/hostname
+fi 
 
-echo "localhost.`facter domain`" > /etc/hostname
 
 echo "HOSTNAME FQDN VALUE IS NOW EQUAL TO:"
 hostname -f
