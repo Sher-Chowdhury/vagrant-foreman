@@ -23,8 +23,9 @@ echo "HOSTNAME FQDN VALUE IS EQUAL TO:"
 hostname -f
 
 
-hostname localhost.localdomain
+hostname "localhost.`facter domain`"
 
+echo "localhost.`facter domain`" > /etc/hostname
 
 echo "HOSTNAME FQDN VALUE IS NOW EQUAL TO:"
 hostname -f
@@ -59,5 +60,3 @@ foreman-installer \
 --foreman-admin-username=vagrant \
 --foreman-admin-password=vagrant
 
-
-puppet agent -t

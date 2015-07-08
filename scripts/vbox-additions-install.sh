@@ -10,3 +10,4 @@ mount -t iso9660 -o loop /root/VBoxGuestAdditions.iso /tmp/isomount
 # Cleanup
 umount isomount
 rm -rf isomount /root/VBoxGuestAdditions.iso
+
