@@ -13,7 +13,6 @@
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
 	  "guest_additions_mode": "attach",
-	  "guest_additions_path": "/tmp/VBoxGuestAdditions",
       "shutdown_command": "shutdown now"
     }
   ],
