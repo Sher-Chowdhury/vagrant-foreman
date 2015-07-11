@@ -12,7 +12,7 @@
       "ssh_wait_timeout": "3000s",
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg <enter>"	  ],
-	  "guest_additions_mode": "attach",
+	  "guest_additions_mode": "upload",
       "shutdown_command": "shutdown now"
     }
   ],
@@ -23,8 +23,7 @@
       "scripts": [ 
 	    "scripts/set-private-keys.sh",
 		"scripts/disable-services.sh",
-		"scripts/vbox-additions-install.sh",
-	    "scripts/foreman-install.sh"
+		"scripts/vbox-additions-install.sh"
 	  ]
     }
 	
