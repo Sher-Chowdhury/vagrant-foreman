@@ -7,4 +7,6 @@ yum -y install foreman-installer
 
 yum -y update
 
-foreman-installer
+# foreman-installer
+
+foreman-installer --foreman-admin-username=admin --foreman-admin-password=password

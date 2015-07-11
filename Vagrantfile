@@ -11,21 +11,29 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.hostname = "puppet.master"  
 
 	# this let's you access the machine httpd service from the host machine.
-	puppetmaster_config.vm.network "forwarded_port", guest:80, host:8888
+	# puppetmaster_config.vm.network "forwarded_port", guest:80, host:8080
+	# puppetmaster_config.vm.network "forwarded_port", guest:443, host:8443
 	
-	puppetmaster_config.vm.network "private_network", ip: "192.168.50.4"
+	# This will appear when you do "ip addr show". You can then access your guest machine's website using "http://192.168.50.4"
+	# IMPORTANT!!!  This line doesn't work on the very firt "vagrant up", but does 
+	# work on the second time, or if you do "vagrant reload"
+	puppetmaster_config.vm.network "private_network", ip: "192.168.50.4"  
 
     puppetmaster_config.vm.provider "virtualbox" do |vb|
       # Display the VirtualBox GUI when booting the machine
       vb.gui = true
       
-      # Customize the amount of memory on the VM:
+      # For common vm settings, e.g. setting ram and cpu we use:
       vb.memory = "1024"
+	  vb.cpus = 2
+	  
+	  # However for more obscure virtualbox specific settings we fall back to virtualbox's "modifyvm" command:
+	  vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
  
       # name of machine that appears on the vb console and vb consoles title. 	  
 	  vb.name = "centos7-foreman"   
-	
-      vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]  
+	  
+        
     end
     
 	
