@@ -14,10 +14,13 @@ Vagrant.configure(2) do |config|
 	# puppetmaster_config.vm.network "forwarded_port", guest:80, host:8080
 	# puppetmaster_config.vm.network "forwarded_port", guest:443, host:8443
 	
+	
 	# This will appear when you do "ip addr show". You can then access your guest machine's website using "http://192.168.50.4"
-	# IMPORTANT!!!  This line doesn't work on the very firt "vagrant up", but does 
-	# work on the second time, or if you do "vagrant reload"
+	# Note this is an alternative to the port forwarding approach that we commented out above. 
 	puppetmaster_config.vm.network "private_network", ip: "192.168.50.4"  
+	# note: this approach works as long as you assign special internal ip addresses. In which case virtualbox's builtin router reroutes the traffic to the 
+	# guest vms.....see: https://en.wikipedia.org/wiki/Private_network 
+	
 
     puppetmaster_config.vm.provider "virtualbox" do |vb|
       # Display the VirtualBox GUI when booting the machine
