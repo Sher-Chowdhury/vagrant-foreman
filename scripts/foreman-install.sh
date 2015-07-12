@@ -10,3 +10,10 @@ yum -y update
 # foreman-installer
 
 foreman-installer --foreman-admin-username=admin --foreman-admin-password=password
+
+
+
+systemctl stop NetworkManager   
+# for some reason i have to turn this off, or connections keeps breaking after a minute. 
+systemctl restart network
+systemctl restart httpd
