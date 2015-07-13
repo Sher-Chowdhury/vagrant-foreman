@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     puppetmaster_config.vm.box = "centos7.box"
     
 	# this set's the machine's hostname. 
-	puppetmaster_config.vm.hostname = "puppet.master"  
+	puppetmaster_config.vm.hostname = "puppetmaster.local"  
 
 	# this let's you access the machine httpd service from the host machine.
 	# puppetmaster_config.vm.network "forwarded_port", guest:80, host:8080
@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
     
   config.vm.define "puppetagent01" do |puppetagent_config|
     puppetagent_config.vm.box = "puppetagent-centos6_6-minimal.box"
-	puppetagent_config.vm.hostname = "puppet.agent01"  
+	puppetagent_config.vm.hostname = "puppetagent01.local"  
 	puppetagent_config.vm.network "private_network", ip: "192.168.50.11"  
     puppetagent_config.vm.provider "virtualbox" do |vb|
       vb.gui = false
@@ -48,6 +48,16 @@ Vagrant.configure(2) do |config|
 	  vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
 	  vb.name = "puppetagent01"    
     end
+    puppetagent_config.vm.provision "shell", path: "scripts/install-puppet-agent.sh"
   end
-
+  
+  # this line relates to the vagrant-hosts plugin, https://github.com/oscar-stack/vagrant-hosts
+  # it adds entry to the /etc/hosts file. 
+  # this block is placed outside the define blocks so that it gts applied to all VMs that are defined in this vagrantfile. 
+  config.vm.provision :hosts do |provisioner|
+    provisioner.add_host '192.168.50.10', ['puppetmaster', 'puppetmaster.local']  
+    provisioner.add_host '192.168.50.11', ['puppetagent01', 'puppetagent01.local']	
+  end
+  
+  
 end
