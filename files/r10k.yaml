@@ -1,0 +1,11 @@
+:cachedir: '/var/cache/r10k'
+
+:sources:
+ puppet:
+    remote: https://github.com/Sher-Chowdhury/cashcow.git   
+    basedir: '/etc/puppet/environments'    
+    prefix: cashcow 
+ hiera:
+    remote: https://github.com/Sher-Chowdhury/cashcow-hiera-datasource.git
+    basedir: '/etc/puppet/hiera'
+    prefix: false
