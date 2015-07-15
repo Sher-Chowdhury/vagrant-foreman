@@ -35,6 +35,8 @@ Vagrant.configure(2) do |config|
 	  vb.name = "centos7-foreman"    
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
+	
   end
     
   config.vm.define "puppetagent01" do |puppetagent_config|

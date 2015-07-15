@@ -22,8 +22,7 @@
       "type": "shell",
       "scripts": [ 
 	    "scripts/set-private-keys.sh",
-		"scripts/disable-services.sh",
-		"scripts/install-gems.sh"
+		"scripts/disable-services.sh"
 	  ]
     }
 	
