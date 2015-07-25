@@ -1,4 +1,4 @@
-centos7-packer-virtualbox-foreman
+vagrant-foreman
 
 
 ### Pre-reqs
@@ -8,8 +8,6 @@ you need to have the following installed on your host machine:
 * virtualbox
 * packer
 * vagrant
-* vagrant plugin: vagrant-hosts
-* vagrant plugin: vagrant-vbguest
 
 
 
@@ -19,8 +17,8 @@ you need to have the following installed on your host machine:
 cd into the project folder and run the following to create the 2 ".box"" files
 
 ```sh
-$ packer build centos-dvd-iso-virtualbox.json
-$ packer build puppetagent-centos6_6-minimal-virtualbox-iso.json
+$ packer build master.json
+$ packer build agent.json
 ```
 Each of the above commands will take about 40mins to complete, but depends on your machine specs and internet connections. 
 

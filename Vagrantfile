@@ -19,7 +19,7 @@ end
 Vagrant.configure(2) do |config|
   # The "puppetmaster" string is the name of the box. hence you can do "vagrant up puppetmaster"
   config.vm.define "puppetmaster" do |puppetmaster_config|
-    puppetmaster_config.vm.box = "centos7.box"
+    puppetmaster_config.vm.box = "master.box"
     
 	# this set's the machine's hostname. 
 	puppetmaster_config.vm.hostname = "puppetmaster.local"  
@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
 	  vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
  
       # name of machine that appears on the vb console and vb consoles title. 	  
-	  vb.name = "centos7-foreman"    
+	  vb.name = "foreman-puppetmaster"    
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   end
     
   config.vm.define "puppetagent01" do |puppetagent_config|
-    puppetagent_config.vm.box = "puppetagent-centos6_6-minimal.box"
+    puppetagent_config.vm.box = "agent.box"
 	puppetagent_config.vm.hostname = "puppetagent01.local"  
 	puppetagent_config.vm.network "private_network", ip: "192.168.50.11"  
     puppetagent_config.vm.provider "virtualbox" do |vb|

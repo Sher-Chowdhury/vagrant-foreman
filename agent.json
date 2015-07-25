@@ -29,6 +29,6 @@
 
   "post-processors": [{
     "type": "vagrant",
-    "output": "puppetagent-centos6_6-minimal.box"
+    "output": "agent.box"
   }]
 }

@@ -30,6 +30,6 @@
 
   "post-processors": [{
     "type": "vagrant",
-    "output": "centos7.box"
+    "output": "master.box"
   }]
 }
