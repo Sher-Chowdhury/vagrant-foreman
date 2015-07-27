@@ -3,7 +3,7 @@
 
 
 # http://stackoverflow.com/questions/19492738/demand-a-vagrant-plugin-within-the-vagrantfile
-required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest )
+required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell )
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
 if not plugins_to_install.empty?
   puts "Installing plugins: #{plugins_to_install.join(' ')}"
@@ -50,6 +50,13 @@ Vagrant.configure(2) do |config|
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
+	
+	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = 'vagrant snapshot take puppetmaster baseline'
+    end
 	
   end
     
@@ -65,6 +72,12 @@ Vagrant.configure(2) do |config|
 	  vb.name = "puppetagent01"    
     end
     puppetagent_config.vm.provision "shell", path: "scripts/install-puppet-agent.sh"
+	
+	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
+	puppetagent_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = 'vagrant snapshot take puppetagent01 baseline'
+    end
+	
   end
   
   # this line relates to the vagrant-hosts plugin, https://github.com/oscar-stack/vagrant-hosts
