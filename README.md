@@ -44,19 +44,17 @@ Enter this in the windows hosts file (C:\Windows\System32\drivers\etc\hosts):
 
 ### Auto snapshots
 
+On accasions you'll want to reset your vagrant boxes. This is usually done by doing "vagrant destroy" followed by "vagrant up". This can be timeconsuming. A much faster approach is to use virtualbox snapshots instead. 
+
+
 For each vm, a virtualbox is taken towards the end of your "vagrant up". This snapshot is called "baseline". If you want to roll back to this snapshot, then you do:
 
 ```
-vagrant snapshot go puppetmaster baseline
+vagrant snapshot go foreman-puppetmaster baseline
 ```
 
-This approach is much faster than doing a "vagrant destroy" followd by "vagrant up" 
+...or for a puppetagent, e.g. puppetagent01, you do:
 
- 
-
-
-
-
-
-
-
+```
+vagrant snapshot go puppetagent01 baseline
+```

@@ -49,6 +49,7 @@ Vagrant.configure(2) do |config|
 	  vb.name = "foreman-puppetmaster"    
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-mcollective-client.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
