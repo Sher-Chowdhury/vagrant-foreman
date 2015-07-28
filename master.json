@@ -7,7 +7,7 @@
       "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
       "iso_checksum_type": "sha256",
       "ssh_username": "root",
-      "ssh_password": "admin",
+      "ssh_password": "vagrant",
 	  "http_directory": "kickstart",
       "ssh_wait_timeout": "3000s",
 	  "boot_wait": "10s",
