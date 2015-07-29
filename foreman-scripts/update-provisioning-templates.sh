@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://github.com/theforeman/foreman_templates
 
-yum -y install ruby193-rubygem-foreman_templates
+yum -y install ruby193-rubygem-foreman_templates  >/dev/null
 
 foreman-rake templates:sync  
 
@@ -50,7 +50,9 @@ hammer template delete --name 'saltstack_minion'
 hammer template delete --name 'UserData default'
 hammer template delete --name 'WAIK default PXELinux'
 hammer template delete --name 'Junos default finish'
-
+#hammer template delete --name 'Boot disk iPXE - generic host'
+#hammer template delete --name 'Boot disk iPXE - host'
+#hammer template delete --name 'http_proxy'
 
 foreman-rake templates:sync repo="http://SChowdhury@stash.ordsvy.gov.uk/scm/~schowdhury/os-foreman-provisioning-templates.git"
 
