@@ -10,9 +10,18 @@ you need to have the following installed on your host machine:
 * vagrant
 
 
+### Pre-reqs (optional)
+
+you need to create 2 directories under these locations:
+
+* C:\vagrant-personal-files
+* C:\packer
+
+copy your .gitconfig file into the vagrant-personal-files directory
+git clone under the packer directory 
+
 
 ### Set up
-
 
 cd into the project folder and run the following to create the 2 ".box"" files
 
