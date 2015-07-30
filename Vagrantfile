@@ -53,7 +53,13 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
+
 	
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = '[ -f /c/vagrant-personal-files/.gitconfig -a -d /c/packer/vagrant-foreman ] && cp /c/vagrant-personal-files/.gitconfig /c/packer/vagrant-foreman/personal-data/.gitconfig'
+    end
+	puppetmaster_config.vm.provision "shell", path: "scripts/copy-gitconfig-into-home-directory.sh"
+		
 	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
 	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = 'vagrant snapshot take puppetmaster baseline'
