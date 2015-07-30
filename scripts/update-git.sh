@@ -12,3 +12,5 @@ make prefix=/usr/local/git all
 make prefix=/usr/local/git install
 echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc
 source /etc/bashrc
+
+# git config --global push.default simple
