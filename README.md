@@ -59,7 +59,7 @@ On accasions you'll want to reset your vagrant boxes. This is usually done by do
 For each vm, a virtualbox is taken towards the end of your "vagrant up". This snapshot is called "baseline". If you want to roll back to this snapshot, then you do:
 
 ```
-vagrant snapshot go foreman-puppetmaster baseline
+vagrant snapshot go puppetmaster baseline
 ```
 
 ...or for a puppetagent, e.g. puppetagent01, you do:
