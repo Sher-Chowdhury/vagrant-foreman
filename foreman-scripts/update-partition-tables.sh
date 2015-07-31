@@ -19,6 +19,11 @@ cd /tmp
 git clone http://SChowdhury@stash.ordsvy.gov.uk/scm/~schowdhury/foreman-partition-tables.git
 
 hammer partition-table create --name '2 drives'  --file /tmp/foreman-partition-tables/2drives.erb
+hammer partition-table create --name 'default'  --file /tmp/foreman-partition-tables/default.erb
+hammer partition-table create --name 'one_partition'  --file /tmp/foreman-partition-tables/one_partition.erb
+
+
+rm -rf /tmp/foreman-partition-tables
 
 
 # Still outstanding: associating partition tables to associated, e.g.:
