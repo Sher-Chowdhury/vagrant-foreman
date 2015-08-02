@@ -3,7 +3,7 @@
 
 
 # http://stackoverflow.com/questions/19492738/demand-a-vagrant-plugin-within-the-vagrantfile
-required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell )
+required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell vagrant-triggers )
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
 if not plugins_to_install.empty?
   puts "Installing plugins: #{plugins_to_install.join(' ')}"
@@ -53,12 +53,23 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
+	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
 
-	
+	# Copy the .gitconfig file from the host machine to the guest machine
 	puppetmaster_config.vm.provision :host_shell do |host_shell|
-      host_shell.inline = '[ -f /c/vagrant-personal-files/.gitconfig -a -d /c/packer/vagrant-foreman ] && cp /c/vagrant-personal-files/.gitconfig /c/packer/vagrant-foreman/personal-data/.gitconfig'
+      host_shell.inline = "cp -f ${HOME}/.gitconfig ./personal-data/.gitconfig"
     end
-	puppetmaster_config.vm.provision "shell", path: "scripts/copy-gitconfig-into-home-directory.sh"
+    puppetmaster_config.vm.provision "shell" do |s| 
+	  s.inline = '[ -f /vagrant/personal-data/.gitconfig ] && runuser -l vagrant -c "cp -f /vagrant/personal-data/.gitconfig ~"'
+    end
+
+    ## Copy the public+private keys from the host machine to the guest machine
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "[ -f ${HOME}/.ssh/id_rsa ] && cp -f ${HOME}/.ssh/id_rsa* ./personal-data/"
+    end
+	puppetmaster_config.vm.provision "shell", path: "scripts/import-ssh-keys.sh"
+		
+	
 		
 	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
 	puppetmaster_config.vm.provision :host_shell do |host_shell|
