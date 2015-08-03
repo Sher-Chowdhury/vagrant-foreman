@@ -50,23 +50,24 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
 	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-vim-puppet-plugins.sh", privileged: false
 
 	# Copy the .gitconfig file from the host machine to the guest machine
-	puppetmaster_config.vm.provision :host_shell do |host_shell|
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = "cp -f ${HOME}/.gitconfig ./personal-data/.gitconfig"
     end
     puppetmaster_config.vm.provision "shell" do |s| 
-	  s.inline = '[ -f /vagrant/personal-data/.gitconfig ] && runuser -l vagrant -c "cp -f /vagrant/personal-data/.gitconfig ~"'
+ 	  s.inline = '[ -f /vagrant/personal-data/.gitconfig ] && runuser -l vagrant -c "cp -f /vagrant/personal-data/.gitconfig ~"'
     end
-
+ 
     ## Copy the public+private keys from the host machine to the guest machine
-	puppetmaster_config.vm.provision :host_shell do |host_shell|
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = "[ -f ${HOME}/.ssh/id_rsa ] && cp -f ${HOME}/.ssh/id_rsa* ./personal-data/"
     end
-	puppetmaster_config.vm.provision "shell", path: "scripts/import-ssh-keys.sh"	
-		
-	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
-	puppetmaster_config.vm.provision :host_shell do |host_shell|
+ 	puppetmaster_config.vm.provision "shell", path: "scripts/import-ssh-keys.sh"	
+ 		
+ 	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = 'vagrant snapshot take puppetmaster baseline'
     end
 	
