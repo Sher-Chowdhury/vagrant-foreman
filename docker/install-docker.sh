@@ -11,5 +11,5 @@ systemctl enable docker
 
 # give vagrant user full priveleges to use docker
 
-
-usermod -aG docker vagrant
+groupadd docker
+gpasswd -a vagrant docker 
