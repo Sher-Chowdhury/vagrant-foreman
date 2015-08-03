@@ -5,17 +5,35 @@ vagrant-foreman
 
 you need to have the following installed on your host machine:
 
-* virtualbox
-* packer
-* vagrant
-* git-bash
+* [virtualbox](https://www.virtualbox.org/)  
+* [packer](https://www.packer.io/)
+* [vagrant](https://www.vagrantup.com/)
+* [git-bash](https://msysgit.github.io/)
 
-### Pre-reqs (optional)
+Once they are all installed, do the following:
 
-Open up a git-bash terminal and run the ssh-keygen command on your host machine (if you havent done this in past already). 
+1. right click on the virtualbox icon, 
+2. go to properties, 
+3. select on shortcut tab
+4. click on the "advanced" button
+5. enable the "Run as Administrator" checkbox and save changes
+6. Repeat the above steps, but this time for Git bash, You can find this icon under, start -> All programs -> git -> Git Bash 
+
+### Pre-reqs (optional, but recommended)
+
+Open up a git-bash terminal and: 
+
+* run the ssh-keygen command on your host machine (if you havent done this in past already). 
+* run the following to enter your credentials:
+```
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
 
 
 ### Set up
+
+Start a git-bash terminal
 
 cd into the project folder and run the following to create the 2 ".box"" files
 
