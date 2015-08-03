@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Some useful plugins: http://vimawesome.com/
 
 ## The following gems are needed:
 gem install puppet-lint 
@@ -14,7 +14,7 @@ cd ~/.vim/bundle
 git clone https://github.com/scrooloose/syntastic.git
 git clone git://github.com/rodjek/vim-puppet.git
 git clone git://github.com/godlygeek/tabular.git
-
+git clone https://github.com/scrooloose/nerdtree.git
 
 echo "execute pathogen#infect()"
 echo "syntax on"
