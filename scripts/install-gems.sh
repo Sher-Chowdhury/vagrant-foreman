@@ -2,7 +2,7 @@
 
 gem install r10k --no-ri --no-rdoc
 mkdir -p /etc/puppetlabs/r10k
-cp /vagrant/files/r10k.yaml /etc/puppetlabs/r10k/
+echo "PATH=$PATH:/usr/local/bin" >> /root/.bashrc   # this is where r10k is executable is stored. 
 
 
 gem install bundler --no-ri --no-rdoc
