@@ -1,0 +1,63 @@
+:cachedir: '/var/cache/r10k'
+
+:sources:
+ puppet:
+    remote: http://stash.ordsvy.gov.uk/scm/in/platform_provision.git
+    basedir: '/etc/puppet/environments'
+    prefix: false #This defaults to false
+ hiera:
+    remote: http://stash.ordsvy.gov.uk/scm/in/hiera.git
+    basedir: '/etc/puppet/hiera'
+    prefix: false
+ puppet_GDMS:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/gdms.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'GDMS'
+ hiera_GDMS:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/gdms.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'GDMS'
+ puppet_CORE:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/core.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'CORE'
+ hiera_CORE:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/core.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'CORE'
+ puppet_CSP:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/csp.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'CSP'
+ hiera_CSP:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/csp.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'CSP'
+ puppet_MAGENTO:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/magento.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'MAGENTO'
+ hiera_MAGENTO:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/magento.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'MAGENTO'
+ puppet_POD:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/pod.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'POD'
+ hiera_POD:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/pod.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'POD'
+ puppet_GENIE:
+    remote: http://stash.ordsvy.gov.uk/scm/prcr/genie.git
+    basedir: '/etc/puppet/environments'
+    prefix: 'GENIE'
+ hiera_GENIE:
+    remote: http://stash.ordsvy.gov.uk/scm/prhr/genie.git
+    basedir: '/etc/puppet/hiera'
+    prefix: 'GENIE'
+
+:purgedirs:
+  - /etc/puppet/environments
+  - /etc/puppet/hiera

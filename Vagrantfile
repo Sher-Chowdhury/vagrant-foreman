@@ -65,7 +65,13 @@ Vagrant.configure(2) do |config|
       host_shell.inline = "[ -f ${HOME}/.ssh/id_rsa ] && cp -f ${HOME}/.ssh/id_rsa* ./personal-data/"
     end
  	puppetmaster_config.vm.provision "shell", path: "scripts/import-ssh-keys.sh"	
- 		
+ 	
+	# Copy the r10k.yaml file from the host machine to the guest machine
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "cp -f /c/vagrant-personal-files/r10k.yaml ./personal-data/r10k.yaml"
+    end
+	puppetmaster_config.vm.provision "shell", path: "scripts/r10k-run.sh"
+	
  	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
  	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = 'vagrant snapshot take puppetmaster baseline'
