@@ -22,8 +22,7 @@ chown foreman-proxy:foreman-proxy /usr/share/foreman-proxy/.ssh/id_rsa.pub
 echo "
 Host *
     StrictHostKeyChecking no
-" > /usr/share/foreman-proxy/.ssh/config
-
+" > /usr/share/foreman-proxy/.ssh/config   # might need to configure ownership and permissions of this file.  
 
 
 
