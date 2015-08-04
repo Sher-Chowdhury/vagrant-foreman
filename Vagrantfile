@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
  	
 	# Copy the r10k.yaml file from the host machine to the guest machine
 	puppetmaster_config.vm.provision :host_shell do |host_shell|
-      host_shell.inline = "cp -f /c/vagrant-personal-files/r10k.yaml ./personal-data/r10k.yaml"
+      host_shell.inline = "[ -f /c/vagrant-personal-files/r10k.yaml ] && cp -f /c/vagrant-personal-files/r10k.yaml ./personal-data/r10k.yaml"
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/r10k-run.sh"
 	

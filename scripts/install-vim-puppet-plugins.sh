@@ -15,7 +15,7 @@ git clone https://github.com/scrooloose/syntastic.git
 git clone git://github.com/rodjek/vim-puppet.git
 git clone git://github.com/godlygeek/tabular.git
 git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/honza/vim-snippets.git
+
 
 
 # vim snippets and shipmate:
