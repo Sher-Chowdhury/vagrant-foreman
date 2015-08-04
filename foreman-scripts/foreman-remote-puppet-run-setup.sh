@@ -1,4 +1,6 @@
 #!/bin/bash
+# http://offandon.org/2015/07/foreman-1-8-and-puppet-run/
+# https://groups.google.com/forum/#!topic/foreman-users/Hc9jpn0ljEc
 
 # Need to use the hammer command to enable the "puppetrun" setting. 
 
