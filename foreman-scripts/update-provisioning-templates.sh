@@ -1,5 +1,6 @@
 #!/bin/bash
 # https://github.com/theforeman/foreman_templates
+# https://puppetmaster.local/config_templates
 
 yum -y install ruby193-rubygem-foreman_templates  >/dev/null
 

@@ -3,7 +3,7 @@
 
 
 # http://stackoverflow.com/questions/19492738/demand-a-vagrant-plugin-within-the-vagrantfile
-required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell )
+required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell vagrant-triggers )
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
 if not plugins_to_install.empty?
   puts "Installing plugins: #{plugins_to_install.join(' ')}"
@@ -24,15 +24,11 @@ Vagrant.configure(2) do |config|
 	# this set's the machine's hostname. 
 	puppetmaster_config.vm.hostname = "puppetmaster.local"  
 
-	# this let's you access the machine httpd service from the host machine.
-	# puppetmaster_config.vm.network "forwarded_port", guest:80, host:8080
-	# puppetmaster_config.vm.network "forwarded_port", guest:443, host:8443
 	
-	# This will appear when you do "ip addr show". You can then access your guest machine's website using "http://192.168.50.4"
-	# Note this is an alternative to the port forwarding approach that we commented out above. 
+	# This will appear when you do "ip addr show". You can then access your guest machine's website using "http://192.168.50.4" 
 	puppetmaster_config.vm.network "private_network", ip: "192.168.50.10"  
-	# note: this approach works as long as you assign special internal ip addresses. In which case virtualbox's builtin router reroutes the traffic to the 
-	# guest vms.....see: https://en.wikipedia.org/wiki/Private_network 
+	# note: this approach assigns a reserved internal ip addresses, which virtualbox's builtin router then reroutes the traffic to,
+	#see: https://en.wikipedia.org/wiki/Private_network 
 	
     puppetmaster_config.vm.provider "virtualbox" do |vb|
       # Display the VirtualBox GUI when booting the machine
@@ -53,9 +49,25 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
-	
-	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
-	puppetmaster_config.vm.provision :host_shell do |host_shell|
+	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-vim-puppet-plugins.sh", privileged: false
+
+	# Copy the .gitconfig file from the host machine to the guest machine
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "cp -f ${HOME}/.gitconfig ./personal-data/.gitconfig"
+    end
+    puppetmaster_config.vm.provision "shell" do |s| 
+ 	  s.inline = '[ -f /vagrant/personal-data/.gitconfig ] && runuser -l vagrant -c "cp -f /vagrant/personal-data/.gitconfig ~"'
+    end
+ 
+    ## Copy the public+private keys from the host machine to the guest machine
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "[ -f ${HOME}/.ssh/id_rsa ] && cp -f ${HOME}/.ssh/id_rsa* ./personal-data/"
+    end
+ 	puppetmaster_config.vm.provision "shell", path: "scripts/import-ssh-keys.sh"	
+ 		
+ 	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
+ 	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = 'vagrant snapshot take puppetmaster baseline'
     end
 	
@@ -88,6 +100,5 @@ Vagrant.configure(2) do |config|
     provisioner.add_host '192.168.50.10', ['puppetmaster', 'puppetmaster.local']  
     provisioner.add_host '192.168.50.11', ['puppetagent01', 'puppetagent01.local']	
   end
-  
   
 end
