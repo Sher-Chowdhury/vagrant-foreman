@@ -30,3 +30,38 @@ gpasswd -a vagrant docker      # If you are running this manually then you need 
 
 docker run -it centos ls       # this will take awhile, about 5mins. Because it is downloading the image from docker.io website for the first time. 
 docker run -it centos ls       # This should 
+
+
+netstat -tlp | grep docker   # By default, the docker service listens to a socket port. 
+                             # So nothing will get outputted here. 
+							 # But we want it to also listen on a network port too. 
+
+# first we need to stop docker: 
+systemctl stop docker       
+
+# Then work out what IP address docker should be listening on.  
+ipaddress=`ip addr show | grep 192 | awk '{print $2}' | cut -d'/' -f1`
+
+# Now start the docker server. 
+# Port 2375 is the standard port that docker listens on. 
+# We also specify "-d" to indicate that it needs to be started up as a deamon. 
+# We also "$" so that it starts as a background process and we get the shell back and it doesn't hang. 
+# Notice that we specified to "-H" to make our single docker service listen on two sources, the web socket, and the network port. 
+docker -H ${ipaddress}:2375	-H unix:///var/run/docker.sock  -d &		
+
+
+
+netstat -tlp | grep docker   # this should now show docker is listening on a network port 	
+
+# Next we want our docker client interacting via the network address rather than the socket address, 
+# This is done by setting the following environment level variable. 
+
+export DOCKER_HOST="tcp://${ipaddress}"   # might need to add this to the bashrc file, or a user level file, e.g. .profile.  
+			 
+# If you want to unset this command again, then do: "export DOCKER_HOST="
+
+
+			 
+			 
+			 
+			 
