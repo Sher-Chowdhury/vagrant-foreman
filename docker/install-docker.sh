@@ -27,3 +27,6 @@ cat /etc/group | grep docker   # This is to confirm that the docker group exists
 
 groupadd docker                
 gpasswd -a vagrant docker      # If you are running this manually then you need to restart the terminal session to clear the old cache. 
+
+docker run -it centos ls       # this will take awhile, about 5mins. Because it is downloading the image from docker.io website for the first time. 
+docker run -it centos ls       # This should 

@@ -27,17 +27,14 @@ Next we need to configure Git bash to make it easier to use:
 2. right click on the header -> defaults -> "Options" tab -> enable check boxes (there's four in total)
 3. Select the "Layout" tab 
 4. Adjust screen/window sizes according to your liking. Also choose a high number for the "Height" option under "screen buffer size", e.g. 5000. 
-
+5. Close git bash terminal, then reopen it again. 
+6. Right click on the header -> properties.
+7. View the necessary tabs to ensure that your changes are now reflected.   
 
 This will allow you to scroll up further and do copy-pasting in/out of the git-bash terminal more easily.  
  
 
-This will make copy and pastin easier. 
 
-Next do:
-
-1. Open new git bash tereminal
-2. right click on the header -> defaults -> "Options" tab -> enable check boxes (there's four in total)
 
 
 ### Pre-reqs (optional, but recommended)
