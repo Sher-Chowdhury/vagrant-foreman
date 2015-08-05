@@ -20,6 +20,26 @@ Once they are all installed, do the following:
 6. Then apply and save changes
 7. Repeat the above steps, but this time for Git bash, You can find this icon under, start -> All programs -> git -> Git Bash 
 
+
+Next we need to configure Git bash to make it easier to use:
+
+1. Open new git bash tereminal
+2. right click on the header -> defaults -> "Options" tab -> enable check boxes (there's four in total)
+3. Select the "Layout" tab 
+4. Adjust screen/window sizes according to your liking. Also choose a high number for the "Height" option under "screen buffer size", e.g. 5000. 
+
+
+This will allow you to scroll up further and do copy-pasting in/out of the git-bash terminal more easily.  
+ 
+
+This will make copy and pastin easier. 
+
+Next do:
+
+1. Open new git bash tereminal
+2. right click on the header -> defaults -> "Options" tab -> enable check boxes (there's four in total)
+
+
 ### Pre-reqs (optional, but recommended)
 
 Open up a git-bash terminal and: 

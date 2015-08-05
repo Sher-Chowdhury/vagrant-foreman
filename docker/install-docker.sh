@@ -22,5 +22,8 @@ docker info       # shows number of containers and images. Also shows storage dr
 
 # give vagrant user full priveleges to use docker
 
-groupadd docker
-gpasswd -a vagrant docker 
+cat /etc/group | grep docker   # This is to confirm that the docker group exists, but with no members at this stage. 
+                               # http://linuxg.net/how-to-administer-groups-with-the-unix-linux-gpasswd-command/
+
+groupadd docker                
+gpasswd -a vagrant docker      # If you are running this manually then you need to restart the terminal session to clear the old cache. 
