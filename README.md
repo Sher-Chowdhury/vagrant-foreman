@@ -14,20 +14,41 @@ Once they are all installed, do the following:
 
 1. right click on the virtualbox icon, 
 2. go to properties, 
-3. select on shortcut tab
+3. select the shortcut tab
 4. click on the "advanced" button
-5. enable the "Run as Administrator" checkbox and save changes
-6. Repeat the above steps, but this time for Git bash, You can find this icon under, start -> All programs -> git -> Git Bash 
+5. enable the "Run as Administrator" checkbox
+6. Then apply and save changes
+7. Repeat the above steps, but this time for Git bash, You can find this icon under, start -> All programs -> git -> Git Bash 
+
+
+Next we need to configure Git bash to make it easier to use:
+
+1. Open new git bash tereminal
+2. right click on the header -> defaults -> "Options" tab -> enable check boxes (there's four in total)
+3. Select the "Layout" tab 
+4. Adjust screen/window sizes according to your liking. Also choose a high number for the "Height" option under "screen buffer size", e.g. 5000. 
+5. Close git bash terminal, then reopen it again. 
+6. Right click on the header -> properties.
+7. View the necessary tabs to ensure that your changes are now reflected.   
+
+This will allow you to scroll up further and do copy-pasting in/out of the git-bash terminal more easily.  
+ 
+
+
+
 
 ### Pre-reqs (optional, but recommended)
 
 Open up a git-bash terminal and: 
 
-* run the ssh-keygen command on your host machine (if you havent done this in past already). 
-* run the following to enter your credentials:
+* run the ssh-keygen command on your host machine (if you haven't already done this in past). 
+* run the following to enter your credentials (if you haven't already done this in past):
+
 ```
 $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
+$ git config --global core.autocrlf false
+$ git config --global push.default simple
 ```
 
 
@@ -41,7 +62,7 @@ cd into the project folder and run the following to create the 2 ".box"" files
 $ packer build master.json
 $ packer build agent.json
 ```
-Each of the above commands will take about 40mins to complete, but depends on your machine specs and internet connections. 
+Each of the above commands will take about 40 minutes to complete, but depends on your machine specs and internet connections. 
 
 The Run the following:
 
@@ -79,3 +100,19 @@ vagrant snapshot go puppetmaster baseline
 ```
 vagrant snapshot go puppetagent01 baseline
 ```
+
+
+
+### Start all over again
+If you want to start from the begining again, then do:
+
+```
+vagrant destroy
+vagrant box list
+vagrant box remove {box name}
+```
+
+Then delete the 2 .box files, or in fact the entire vagrant project then do a git clone again.  
+
+
+
