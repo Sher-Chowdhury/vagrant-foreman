@@ -57,7 +57,7 @@ echo "Script now running"
 
 #userlist="$(hammer -u $FMANID -p $FMANPWD user list |grep "^[0-9]"|grep -v "admin" | awk '{print $1;}')"
 for userid in $userlist; do
-	 hammer -u $FMANID -p $FMANPWD user delete --name $id
+	 hammer -u $FMANID -p $FMANPWD user delete --id $userid
 done
 
 #########################################################################
@@ -156,5 +156,7 @@ hammer -u $FMANID -p $FMANPWD user-group create  --name "Read Only" --role-ids 5
 hammer -u $FMANID -p $FMANPWD settings set --name use_shortname_for_vms --value true
 hammer -u $FMANID -p $FMANPWD settings set --name host_group_matchers_inheritance --value false
 hammer -u $FMANID -p $FMANPWD settings set --name email_reply_address --value foreman-noreply@ordsvy.gov.uk
+hammer -u $FMANID -p $FMANPWD settings set --name puppetrun --value true
+
 
 
