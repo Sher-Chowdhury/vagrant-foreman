@@ -22,10 +22,12 @@ docker info       # shows number of containers and images. Also shows storage dr
 
 # give vagrant user full priveleges to use docker
 
+
+groupadd docker  
 cat /etc/group | grep docker   # This is to confirm that the docker group exists, but with no members at this stage. 
                                # http://linuxg.net/how-to-administer-groups-with-the-unix-linux-gpasswd-command/
 
-groupadd docker                
+              
 gpasswd -a vagrant docker      # If you are running this manually then you need to restart the terminal session to clear the old cache. 
 
 docker run centos ls       # this will take awhile, about 5mins. Because it is downloading the image from docker.io website for the first time. 
@@ -54,9 +56,6 @@ ipaddress=`ip addr show | grep 192 | awk '{print $2}' | cut -d'/' -f1`
 # We also specify "-d" to indicate that it needs to be started up as a deamon. 
 # We also "$" so that it starts as a background process and we get the shell back and it doesn't hang. 
 # Notice that we specified to "-H" to make our single docker service listen on two sources, the web socket, and the network port. 
-docker -H ${ipaddress}:2375 -H unix:///var/run/docker.sock -d &		
-
-
 
 
 netstat -tlp | grep docker   # this should now show docker is listening on a network port 	
@@ -64,12 +63,72 @@ netstat -tlp | grep docker   # this should now show docker is listening on a net
 # Next we want our docker client interacting via the network address rather than the socket address, 
 # This is done by setting the following environment level variable. 
 
-export DOCKER_HOST="tcp://${ipaddress}"   # might need to add this to the bashrc file, or a user level file, e.g. .profile.  
+export DOCKER_HOST="tcp://${ipaddress}"   
+
+echo "The 'DOCKER_HOST' is set to $DOCKER_HOST"
 			 
 # If you want to unset this command again, then do: "export DOCKER_HOST="
 
-
+# To make this permenant we do:
+echo "export DOCKER_HOST=tcp://${ipaddress}" >> /etc/bashrc
+source /etc/bashrc
 			 
 			 
-			 
-			 
+### Background info ###
+# to spin up a new container at start an interactive shell inside it, you do:
+#
+# [vagrant@puppetmaster ~]$ docker run -it centos /bin/bash
+#
+# Here we are starting an (i)nteractive shell with (t)ty. 
+# By running this we end up with a prompt that looks like this:
+#
+# [root@4bd283ab9f50 /]#
+# 
+# That's because:
+#
+# [root@7bfb0e63b166 /]# hostname -f
+# 7bfb0e63b166
+# 
+# Here you can do:
+#
+# $ ping 8.8.8.8       # note this will work if you network allows pinging. 
+#                      # In a lot of workplaces, pinging is disabled for security purposes. 
+#
+#
+# $ ps -elf
+# F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
+# 4 S root         1     0  0  80   0 -  2936 wait   08:34 ?        00:00:00 /bin/bash
+# 0 R root        20     1  0  80   0 -  4941 -      08:35 ?        00:00:00 ps -elf
+#
+#
+# [root@7bfb0e63b166 /]# cat /etc/hosts
+# 172.17.0.14	7bfb0e63b166                      # notice this alias for the hostname
+# 127.0.0.1	localhost
+# ::1	localhost ip6-localhost ip6-loopback
+# fe00::0	ip6-localnet
+# ff00::0	ip6-mcastprefix
+# ff02::1	ip6-allnodes
+# ff02::2	ip6-allrouters
+# [root@7bfb0e63b166 /]# 
+# 
+# This IP addrss is also our main interface's ip address:
+#
+# 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
+#     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+#     inet 127.0.0.1/8 scope host lo
+#        valid_lft forever preferred_lft forever
+#     inet6 ::1/128 scope host 
+#        valid_lft forever preferred_lft forever
+# 35: eth0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP 
+#     link/ether 02:42:ac:11:00:0e brd ff:ff:ff:ff:ff:ff
+#     inet 172.17.0.14/16 scope global eth0                                  Notice this ip address matches,. 
+#        valid_lft forever preferred_lft forever
+#     inet6 fe80::42:acff:fe11:e/64 scope link 
+#        valid_lft forever preferred_lft forever
+# [root@7bfb0e63b166 /]# 
+#
+#
+#
+#
+#
+#
