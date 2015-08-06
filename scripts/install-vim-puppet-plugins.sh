@@ -38,3 +38,5 @@ echo "let g:syntastic_check_on_open = 1" >> ~/.vimrc
 echo "let g:syntastic_check_on_wq = 1" >> ~/.vimrc
 
 
+runuser -l  vagrant -c "echo 'PATH=$PATH:/home/vagrant/bin' >> /home/vagrant/.bashrc"   # this is to get puppet lint to work. 
+
