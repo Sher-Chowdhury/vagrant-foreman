@@ -51,6 +51,18 @@ $ git config --global core.autocrlf false
 $ git config --global push.default simple
 ```
 
+On your (linux) host machine, create the following folder and add the following files:
+
+```
+# If your host machine is:
+$ ls /c/vagrant-personal-files
+hiera.yaml  r10k.yaml
+
+```
+
+However if your host machine is a windows machine, then create folder "C:\vagrant-personal-files" and place the above files in there instead. 
+
+
 
 ### Set up
 

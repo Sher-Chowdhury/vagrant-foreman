@@ -80,6 +80,13 @@ Vagrant.configure(2) do |config|
       host_shell.inline = "[ -f /c/vagrant-personal-files/r10k.yaml ] && cp -f /c/vagrant-personal-files/r10k.yaml ./personal-data/r10k.yaml"
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/r10k-run.sh"
+
+	# Copy the hiera.yaml file from the host machine to the guest machine
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "[ -f /c/vagrant-personal-files/hiera.yaml ] && cp -f /c/vagrant-personal-files/hiera.yaml ./personal-data/hiera.yaml"
+    end
+	puppetmaster_config.vm.provision "shell", path: "scripts/copy-hiera-yaml-file-into-vm.sh"
+
 	
  	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
  	puppetmaster_config.vm.provision :host_shell do |host_shell|
