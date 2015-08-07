@@ -63,7 +63,9 @@ netstat -tlp | grep docker   # this should now show docker is listening on a net
 # Next we want our docker client interacting via the network address rather than the socket address, 
 # This is done by setting the following environment level variable. 
 
-export DOCKER_HOST="tcp://${ipaddress}"   
+export DOCKER_HOST="tcp://${ipaddress}:2375"   
+
+
 
 echo "The 'DOCKER_HOST' is set to $DOCKER_HOST"
 			 
@@ -72,6 +74,11 @@ echo "The 'DOCKER_HOST' is set to $DOCKER_HOST"
 # To make this permenant we do:
 echo "export DOCKER_HOST=tcp://${ipaddress}" >> /etc/bashrc
 source /etc/bashrc
+
+# Now we start the docker daemon:
+
+docker -H ${ipaddress}:2375  -H unix:///var/run/docker.sock   -d &
+
 			 
 			 
 ### Background info ###
@@ -128,7 +135,33 @@ source /etc/bashrc
 # [root@7bfb0e63b166 /]# 
 #
 #
+# Let's confirm that we have a RHEL related distro:
+#
+# [root@a894765524cc /]# cat /etc/redhat-release
+# CentOS Linux release 7.1.1503 (Core)
 #
 #
 #
 #
+#
+#
+
+# this lists docker containers that are currently running:
+docker ps
+
+# This lists all containers that have been run on this machine. 
+docker ps -a
+
+# The above will list the docker's id. You can use this ID to log back into the docker container,
+# To do this you need to run the following 2 commands:
+
+# $ docker start {container-id}    # switches ON the container
+# $ docker attach {container-id}   # logs into the container again. 
+
+# When you exit again, the container will power-off again. 
+
+# Note any files you create in a container are persistant.  
+
+
+
+
