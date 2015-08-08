@@ -7,5 +7,9 @@ yum -y install puppet facter
 echo "    certname          = `hostname --fqdn`" >> /etc/puppet/puppet.conf
 echo "    server            = puppetmaster.local" >> /etc/puppet/puppet.conf
 
-puppet agent -t  2>/dev/null
-puppet agent -t
+
+ping -c 3 puppetmaster.local
+if [ $? -eq 0 ]; then
+  puppet agent -t  2>/dev/null
+  puppet agent -t
+fi

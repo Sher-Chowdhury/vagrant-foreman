@@ -54,11 +54,12 @@ Vagrant.configure(2) do |config|
 	  vb.name = "foreman-puppetmaster"    
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
+	puppetmaster_config.vm.provision "shell", path: "foreman-scripts/master-puppet-run-setup.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-mcollective-client.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
-	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
+#	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-vim-puppet-plugins.sh", privileged: false
 
 	# Copy the .gitconfig file from the host machine to the guest machine
@@ -107,6 +108,7 @@ Vagrant.configure(2) do |config|
 	  vb.name = "puppetagent01"    
     end
     puppetagent_config.vm.provision "shell", path: "scripts/install-puppet-agent.sh"
+	puppetagent_config.vm.provision "shell", path: "foreman-scripts/agent-puppet-run-setup.sh"
 	
 	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
 	puppetagent_config.vm.provision :host_shell do |host_shell|
