@@ -40,11 +40,12 @@ Vagrant.configure(2) do |config|
 	  
 	  # adding a second hdd to my vm. 
 	  # https://gist.github.com/leifg/4713995
-	  docker_storage = './tmp/docker.vdi'
-	  unless File.exist?(docker_storage)
-        vb.customize ['createhd', '--filename', docker_storage, '--size', 50 * 1024]     # This is 50GB, 
-      end
-      vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', docker_storage]
+	  
+	  #   docker_storage = './tmp/docker.vdi'
+	  #   unless File.exist?(docker_storage)
+      #     vb.customize ['createhd', '--filename', docker_storage, '--size', 50 * 1024]     # This is 50GB, 
+      #   end
+      #   vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', docker_storage]
 	  
 	  
 	  # However for more obscure virtualbox specific settings we fall back to virtualbox's "modifyvm" command:
