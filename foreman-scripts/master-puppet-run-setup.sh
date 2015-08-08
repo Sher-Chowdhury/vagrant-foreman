@@ -28,19 +28,8 @@ chown foreman-proxy:foreman-proxy /usr/share/foreman-proxy/.ssh/*
 
 
 sed -i -e 's/#:puppet_provider: puppetrun/:puppet_provider: puppetssh/g' /etc/foreman-proxy/settings.d/puppet.yml
-sed -i -e 's+#:puppetssh_keyfile: /etc/foreman-proxy/id_rsa+:/usr/share/foreman-proxy/.ssh+g' /etc/foreman-proxy/settings.d/puppet.yml
+sed -i -e 's+#:puppetssh_keyfile: /etc/foreman-proxy/id_rsa+:puppetssh_keyfile: /usr/share/foreman-proxy/.ssh+g' /etc/foreman-proxy/settings.d/puppet.yml
 sed -i -e 's/#:puppet_user: root/:puppet_user: root/g' /etc/foreman-proxy/settings.d/puppet.yml
-
-
-exit 0
-
-
-
-
-# manually perform ssh connections and connect using all agent machine aliases, i.e. hostname, ip-number, fqdn,
-# this is to ensure all RSA fingerprinting is completed. or maybe this will work:
-
-
 
 
 exit 0
