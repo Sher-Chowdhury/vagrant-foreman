@@ -3,7 +3,7 @@
 
 
 # http://stackoverflow.com/questions/19492738/demand-a-vagrant-plugin-within-the-vagrantfile
-required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell vagrant-triggers )
+required_plugins = %w( vagrant-hosts vagrant-share vagrant-vbguest vagrant-vbox-snapshot vagrant-host-shell vagrant-triggers vagrant-reload )
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
 if not plugins_to_install.empty?
   puts "Installing plugins: #{plugins_to_install.join(' ')}"
@@ -89,6 +89,7 @@ Vagrant.configure(2) do |config|
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/copy-hiera-yaml-file-into-vm.sh"
 
+	puppetmaster_config.vm.provision :reload   # this is because foreman's puppetssh feature requires a reboot in order for it to work. 
 	
  	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
  	puppetmaster_config.vm.provision :host_shell do |host_shell|
