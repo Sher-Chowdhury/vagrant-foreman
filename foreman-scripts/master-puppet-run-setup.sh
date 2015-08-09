@@ -19,17 +19,16 @@ chmod 644 /usr/share/foreman-proxy/.ssh/id_rsa.pub
 # chmod 600 /etc/foreman-proxy/id_rsa
 # chown foreman-proxy:foreman-proxy /etc/foreman-proxy/id_rsa
 
-echo "
-Host *
+echo "Host *
     StrictHostKeyChecking no
-" > /usr/share/foreman-proxy/.ssh/config    
+UserKnownHostsFile /dev/null" > /usr/share/foreman-proxy/.ssh/config    
 
 chown foreman-proxy:foreman-proxy /usr/share/foreman-proxy/.ssh/*
 
 
 sed -i -e 's/#:puppet_provider: puppetrun/:puppet_provider: puppetssh/g' /etc/foreman-proxy/settings.d/puppet.yml
-sed -i -e 's+#:puppetssh_keyfile: /etc/foreman-proxy/id_rsa+:puppetssh_keyfile: /usr/share/foreman-proxy/.ssh+g' /etc/foreman-proxy/settings.d/puppet.yml
-sed -i -e 's/#:puppet_user: root/:puppet_user: root/g' /etc/foreman-proxy/settings.d/puppet.yml
+sed -i -e 's+#:puppetssh_keyfile: /etc/foreman-proxy/id_rsa+:puppetssh_keyfile: /usr/share/foreman-proxy/.ssh/id_rsa+g' /etc/foreman-proxy/settings.d/puppet.yml
+sed -i -e 's/#:puppetssh_user: root/:puppetssh_user: root/g' /etc/foreman-proxy/settings.d/puppet.yml
 
 
 exit 0
