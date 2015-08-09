@@ -36,7 +36,7 @@ docker run centos ls       # This should
 
 netstat -tlp | grep docker   # By default, the docker service listens to a socket port. 
                              # So nothing will get outputted here. 
-							 # But we want it to also listen on a network port too. 
+							 # But we want it to also listen on a network port too....acutally no because that would be a security problem.  
 
 # Needed to do a network reset here. Not sure whey though. 
 systemctl restart NetworkManager
@@ -44,10 +44,10 @@ systemctl restart network
 							 
 							 
 # first we need to stop docker: 
-systemctl stop docker       
+# systemctl stop docker       
 
 # Then work out what IP address docker should be listening on.  
-ipaddress=`ip addr show | grep 192 | awk '{print $2}' | cut -d'/' -f1`
+#ipaddress=`ip addr show | grep 192 | awk '{print $2}' | cut -d'/' -f1`
 
 
 
@@ -58,27 +58,29 @@ ipaddress=`ip addr show | grep 192 | awk '{print $2}' | cut -d'/' -f1`
 # Notice that we specified to "-H" to make our single docker service listen on two sources, the web socket, and the network port. 
 
 
-netstat -tlp | grep docker   # this should now show docker is listening on a network port 	
+#netstat -tlp | grep docker   # this should now show docker is listening on a network port 	
 
 # Next we want our docker client interacting via the network address rather than the socket address, 
 # This is done by setting the following environment level variable. 
 
-export DOCKER_HOST="tcp://${ipaddress}:2375"   
+#export DOCKER_HOST="tcp://${ipaddress}:2375"   
 
 
 
-echo "The 'DOCKER_HOST' is set to $DOCKER_HOST"
+#echo "The 'DOCKER_HOST' is set to $DOCKER_HOST"
 			 
 # If you want to unset this command again, then do: "export DOCKER_HOST="
 
 # To make this permenant we do:
-echo "export DOCKER_HOST=tcp://${ipaddress}" >> /etc/bashrc
-source /etc/bashrc
+#echo "export DOCKER_HOST=tcp://${ipaddress}" >> /etc/bashrc
+#source /etc/bashrc
 
 # Now we start the docker daemon:
 
-docker -H ${ipaddress}:2375  -H unix:///var/run/docker.sock   -d &
-
+#sleep 10
+#echo "starting nohup"
+#nohup docker -H "${ipaddress}:2375" -d &
+#echo "ending nohup"
 			 
 			 
 ### Background info ###
