@@ -1,5 +1,7 @@
 #!/bin/sh
 
+gem source https://rubygems.org
+
 gem install r10k --no-ri --no-rdoc
 mkdir -p /etc/puppetlabs/r10k
 echo "PATH=$PATH:/usr/local/bin" >> /root/.bashrc   # this is where r10k is executable is stored. 
