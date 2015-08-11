@@ -47,6 +47,9 @@ Vagrant.configure(2) do |config|
       #   end
       #   vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', docker_storage]
 	  
+	  # this port forwarding is required if you want an external agent (i.e. not a virtualbox puppet agent)
+	  # to connect to you puppetmaster. 
+	  puppetmaster_config.vm.network "forwarded_port", guest: 8140, host: 8140, protocol: 'tcp'
 	  
 	  # However for more obscure virtualbox specific settings we fall back to virtualbox's "modifyvm" command:
 	  vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
