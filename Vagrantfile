@@ -100,26 +100,28 @@ Vagrant.configure(2) do |config|
     end
 	
   end
-    
-  config.vm.define "puppetagent01" do |puppetagent_config|
-    puppetagent_config.vm.box = "agent.box"
-	puppetagent_config.vm.hostname = "puppetagent01.local"  
-	puppetagent_config.vm.network "private_network", ip: "192.168.50.11"  
-    puppetagent_config.vm.provider "virtualbox" do |vb|
-      vb.gui = false
-      vb.memory = "1024"
-	  vb.cpus = 1
-	  vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
-	  vb.name = "puppetagent01"    
+
+  (1..2).each do |i|  
+    config.vm.define "puppetagent0#{i}" do |puppetagent_config|
+      puppetagent_config.vm.box = "agent.box"
+      puppetagent_config.vm.hostname = "puppetagent0#{i}.local"  
+      puppetagent_config.vm.network "private_network", ip: "192.168.50.1#{i}"  
+      puppetagent_config.vm.provider "virtualbox" do |vb|
+        vb.gui = false
+        vb.memory = "1024"
+        vb.cpus = 1
+        vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+        vb.name = "puppetagent0#{i}"    
+      end
+      puppetagent_config.vm.provision "shell", path: "scripts/install-puppet-agent.sh"
+      puppetagent_config.vm.provision "shell", path: "foreman-scripts/agent-puppet-run-setup.sh"
+      
+      # this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
+      puppetagent_config.vm.provision :host_shell do |host_shell|
+        host_shell.inline = "vagrant snapshot take puppetagent0#{i} baseline"
+      end
+      
     end
-    puppetagent_config.vm.provision "shell", path: "scripts/install-puppet-agent.sh"
-	puppetagent_config.vm.provision "shell", path: "foreman-scripts/agent-puppet-run-setup.sh"
-	
-	# this takes a vm snapshot (which we have called "basline") as the last step of "vagrant up". 
-	puppetagent_config.vm.provision :host_shell do |host_shell|
-      host_shell.inline = 'vagrant snapshot take puppetagent01 baseline'
-    end
-	
   end
   
   # this line relates to the vagrant-hosts plugin, https://github.com/oscar-stack/vagrant-hosts
@@ -127,7 +129,8 @@ Vagrant.configure(2) do |config|
   # this block is placed outside the define blocks so that it gts applied to all VMs that are defined in this vagrantfile. 
   config.vm.provision :hosts do |provisioner|
     provisioner.add_host '192.168.50.10', ['puppetmaster', 'puppetmaster.local']  
-    provisioner.add_host '192.168.50.11', ['puppetagent01', 'puppetagent01.local']	
+    provisioner.add_host '192.168.50.11', ['puppetagent01', 'puppetagent01.local']
+    provisioner.add_host '192.168.50.12', ['puppetagent02', 'puppetagent02.local']	
   end
   
   config.vm.provision :host_shell do |host_shell|
@@ -137,5 +140,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision :host_shell do |host_shell|
     host_shell.inline = 'hostfile=/c/Windows/System32/drivers/etc/hosts && grep -q 192.168.50.11 $hostfile || echo "192.168.50.11   puppetagent01 puppetagent01.local" >> $hostfile'
   end  
+
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = 'hostfile=/c/Windows/System32/drivers/etc/hosts && grep -q 192.168.50.12 $hostfile || echo "192.168.50.12   puppetagent01 puppetagent02.local" >> $hostfile'
+  end 
   
 end
