@@ -17,6 +17,9 @@ end
 
 
 Vagrant.configure(2) do |config|
+  ##
+  ## PUPPET MASTER
+  ##
   # The "puppetmaster" string is the name of the box. hence you can do "vagrant up puppetmaster"
   config.vm.define "puppetmaster" do |puppetmaster_config|
     puppetmaster_config.vm.box = "master.box"
@@ -65,7 +68,8 @@ Vagrant.configure(2) do |config|
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
 #	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-vim-puppet-plugins.sh", privileged: false
-
+	puppetmaster_config.vm.provision "shell", path: "scripts/setup-puppet-rspec.sh"
+	
 	# Copy the .gitconfig file from the host machine to the guest machine
  	puppetmaster_config.vm.provision :host_shell do |host_shell|
       host_shell.inline = "cp -f ${HOME}/.gitconfig ./personal-data/.gitconfig"
