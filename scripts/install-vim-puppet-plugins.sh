@@ -40,3 +40,8 @@ echo "let g:syntastic_check_on_wq = 1" >> ~/.vimrc
 
 echo 'PATH=$PATH:/home/vagrant/bin' >> /home/vagrant/.bashrc  # this is to get puppet lint to work. 
 
+
+# here's some extra configurations to make vim easier to use:
+
+cat /vagrant/files/.vimrc >> ~/.vimrc
+
