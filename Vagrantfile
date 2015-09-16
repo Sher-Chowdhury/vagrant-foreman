@@ -60,15 +60,15 @@ Vagrant.configure(2) do |config|
       # name of machine that appears on the vb console and vb consoles title. 	  
 	  vb.name = "foreman-puppetmaster"    
     end
-	puppetmaster_config.vm.provision "shell", path: "scripts/foreman-install.sh"
+#	puppetmaster_config.vm.provision "shell", path: "scripts/foreman/foreman-install.sh"
 	puppetmaster_config.vm.provision "shell", path: "foreman-scripts/master-puppet-run-setup.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-mcollective-client.sh"
-	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
-	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"
-	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"
+#	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
+#	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"           # no longer using gerrit, so this is obselete
+#	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"   # no longer using gerrit, so this is obselete
 #	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-vim-puppet-plugins.sh", privileged: false
-	puppetmaster_config.vm.provision "shell", path: "scripts/setup-puppet-rspec.sh"
+#	puppetmaster_config.vm.provision "shell", path: "scripts/setup-puppet-rspec.sh"
 	
 	# Copy the .gitconfig file from the host machine to the guest machine
  	puppetmaster_config.vm.provision :host_shell do |host_shell|

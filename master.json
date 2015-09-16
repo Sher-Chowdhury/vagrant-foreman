@@ -8,11 +8,11 @@
       "iso_checksum_type": "sha256",
       "ssh_username": "root",
       "ssh_password": "vagrant",
-	  "http_directory": "kickstart",
+      "http_directory": "kickstart",
       "ssh_wait_timeout": "3000s",
-	  "boot_wait": "10s",
-	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/master-ks.cfg <enter>"	  ],
-	  "guest_additions_mode": "upload",
+      "boot_wait": "10s",
+      "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/master-ks.cfg <enter>"	  ],
+      "guest_additions_mode": "upload",
       "shutdown_command": "shutdown now"
     }
   ],
@@ -21,11 +21,15 @@
     {
       "type": "shell",
       "scripts": [ 
-	    "scripts/set-private-keys.sh",
-		"scripts/disable-services.sh"
-	  ]
+        "scripts/set-private-keys.sh",
+        "scripts/foreman/install-foreman.sh",
+		"scripts/install-gems.sh",
+		"scripts/setup-puppet-rspec.sh",
+		"scripts/setup-aliases.sh",
+        "scripts/disable-services.sh"
+      ]
     }
-	
+    
   ],
 
   "post-processors": [{

@@ -2,7 +2,7 @@
 # Some useful plugins: http://vimawesome.com/
 
 ## The following gems are needed:
-gem install puppet-lint 
+gem install puppet-lint              # http://puppet-lint.com/
 gem install puppet-syntax
 
 
@@ -44,4 +44,7 @@ echo 'PATH=$PATH:/home/vagrant/bin' >> /home/vagrant/.bashrc  # this is to get p
 # here's some extra configurations to make vim easier to use:
 
 cat /vagrant/files/.vimrc >> ~/.vimrc
+
+echo "--no-80chars-check" >> ~/.puppet-lint.rc    # http://stackoverflow.com/questions/29206887/puppet-lint-configuration-file
+                                                  # https://github.com/rodjek/puppet-lint#puppet-lint-1
 
