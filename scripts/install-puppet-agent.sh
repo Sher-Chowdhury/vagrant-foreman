@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+# this script is run on the agent only. 
 
-rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 
 yum -y install puppet facter
 
