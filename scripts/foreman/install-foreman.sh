@@ -105,5 +105,7 @@ systemctl restart httpd
 # https://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html#basic-autosigning-autosignconf
 echo '*' >> /etc/puppet/autosign.conf
 
+systemctl disable puppet
+puppet agent -t
 
 
