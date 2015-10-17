@@ -6,14 +6,14 @@ echo "  "
 echo "  "
 echo "  "
 echo "  "
-yum -y install epel-release http://yum.theforeman.org/releases/1.9/el7/x86_64/foreman-release.rpm
+yum -y install http://yum.theforeman.org/releases/1.9/el7/x86_64/foreman-release.rpm
 yum clean all
 
 echo "  "
 echo "  "
 echo "  "
 echo "  "
-yum info epel-release
+# yum info epel-release
 
 
 echo "HERES A LIST OF ALL THE REPOS"
@@ -35,9 +35,59 @@ echo "  "
 echo "  "
 echo "  "
 
-# foreman-installer
 
-foreman-installer --foreman-admin-username=admin --foreman-admin-password=password
+echo "output from hostname"
+hostname
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+
+echo "output from hostname -f"
+hostname -f
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+echo "output from facter hostname"
+facter hostname
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+echo "output from facter fqdn"
+facter fqdn
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+
+echo "Content of /etc/sysconfig/network"
+cat /etc/sysconfig/network
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+
+echo "Content of /etc/hosts"
+cat /etc/hosts
+echo "  "
+echo "  "
+echo "  "
+echo "  "
+
+
+
+
+
+
+
+foreman-installer --foreman-admin-username=admin --foreman-admin-password=password  || exit 1
 
 
 
@@ -89,8 +139,8 @@ foreman-installer --foreman-admin-username=admin --foreman-admin-password=passwo
 # yum -y install rubygem-hammer_cli_foreman
 
 
-systemctl disable NetworkManager
-systemctl stop NetworkManager   
+# systemctl disable NetworkManager
+# systemctl stop NetworkManager   
 # for some reason i have to turn NetworkManager off, or connections keeps breaking after a minute. 
 systemctl restart network
 systemctl restart httpd
