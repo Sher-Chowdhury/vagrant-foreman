@@ -12,5 +12,6 @@ gem install rake --no-ri --no-rdoc
 
 
 # Installing rvm for the vagrant user
-# runuser -l vagrant -c 'gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
-# runuser -l vagrant -c 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
+runuser -l vagrant -c 'gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
+runuser -l vagrant -c 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
+runuser -l vagrant -c 'rvm use system'
