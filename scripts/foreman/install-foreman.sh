@@ -162,10 +162,10 @@ echo line159
 abrt-cli list
 [ `abrt-cli list | wc -l` -gt 0 ] && exit 1
 
-hammer environment list
-hammer host create --name puppetmaster.local --environment-id 1 --puppet-proxy-id 1 --interface Id=1,primary=true,provision=true --build false --enabled false --managed false
 
-# puppet agent -t
+# hammer host create --name puppetmaster.local --environment-id 1 --puppet-proxy-id 1 --interface Id=1,primary=true,provision=true --build false --enabled false --managed false
+
+# puppet agent -t  # this caused the abrt-cli list problem, which could be to do with the NetworkManager not working. 
 echo line164
 abrt-cli list
 [ `abrt-cli list | wc -l` -gt 0 ] && exit 1 
