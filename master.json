@@ -23,9 +23,7 @@
       "scripts": [ 
         "scripts/set-private-keys.sh",
         "scripts/foreman/install-foreman.sh",
-        "scripts/setup-aliases.sh",
-		"scripts/install-gems.sh",
-		"scripts/setup-aliases.sh"
+		"scripts/install-gems.sh"
       ]
     }
     
