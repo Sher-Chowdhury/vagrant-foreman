@@ -16,12 +16,6 @@ fi
 
 
 
-echo "NM_CONTROLLED=no" >> /etc/sysconfig/network-scripts/ifcfg-lo  || exit 1  # NetworkManager for some reason stops this from starting up. 
-# systemctl stop NetworkManager
-# systemctl disable NetworkManager
-systemctl restart network
-
-
 # puppet agent -t || exit 1  # this is not really to do with r10k run. but added it here anyway. 
 
 

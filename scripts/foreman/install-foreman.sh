@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo "NM_CONTROLLED=no" >> /etc/sysconfig/network-scripts/ifcfg-lo  || exit 1  # NetworkManager for some reason stops lo from starting up. 
+systemctl stop NetworkManager
+systemctl disable NetworkManager   # could be causing the abrt-cli problem   
+# for some reason i have to turn NetworkManager off, or connections keeps breaking after a minute. 
+systemctl restart network
+
+
+
 echo "RUNNING THE RPM COMMAND"
 rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 echo "  "
@@ -138,24 +146,27 @@ foreman-installer --foreman-admin-username=admin --foreman-admin-password=passwo
 # yum -y install rubygem-hammer_cli
 # yum -y install rubygem-hammer_cli_foreman
 
-
-# systemctl disable NetworkManager
-# systemctl stop NetworkManager   
-# for some reason i have to turn NetworkManager off, or connections keeps breaking after a minute. 
-systemctl restart network
-systemctl restart httpd
-
-
-
-
-
 # this is so to get the puppetmaster to autosign puppet agent certificicates. 
 # This means that you no longer need to do "puppet cert sign...etc"
 # http://www.puppetcookbook.com/posts/autosigning-client-certificates.html
 # https://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html#basic-autosigning-autosignconf
 echo '*' >> /etc/puppet/autosign.conf
 
+
+
+systemctl restart httpd
 systemctl disable puppet
-puppet agent -t
 
 
+echo line159
+abrt-cli list
+[ `abrt-cli list | wc -l` -gt 0 ] && exit 1
+
+hammer environment list
+hammer host create --name puppetmaster.local --environment-id 1 --puppet-proxy-id 1 --interface Id=1,primary=true,provision=true --build false --enabled false --managed false
+
+# puppet agent -t
+echo line164
+abrt-cli list
+[ `abrt-cli list | wc -l` -gt 0 ] && exit 1 
+echo line167
