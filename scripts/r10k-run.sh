@@ -1,5 +1,7 @@
 #!/bin/bash
 
+puppet agent -t   # the foreman server needs to appear as a host beforem it can import-classes. 
+
 if [ -f /vagrant/personal-data/r10k.yaml ]; then
 
   cp -f /vagrant/personal-data/r10k.yaml /etc/puppetlabs/r10k/r10k.yaml
@@ -16,7 +18,6 @@ fi
 
 
 
-# puppet agent -t || exit 1  # this is not really to do with r10k run. but added it here anyway. 
 
 
 exit 0
