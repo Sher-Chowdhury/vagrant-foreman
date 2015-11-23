@@ -5,7 +5,7 @@ puppet agent -t   # the foreman server needs to appear as a host beforem it can 
 if [ -f /vagrant/personal-data/r10k.yaml ]; then
 
   cp -f /vagrant/personal-data/r10k.yaml /etc/puppetlabs/r10k/r10k.yaml
-  r10k deploy environment
+  r10k deploy environment -v 
   
   chown vagrant:vagrant -R /etc/puppet/environments
   
