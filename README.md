@@ -54,13 +54,16 @@ $ git config --global push.default simple
 On your (linux) host machine, create the following folder and add the following files:
 
 ```
-# If your host machine is:
-$ ls /c/vagrant-personal-files
-hiera.yaml  r10k.yaml
-
+$ ls -l /c/vagrant-personal-files/
+total 1
+drwxr-xr-x    4 SChowdhu Administ        0 Dec 21 14:20 GitServerCertificates
+-rw-r--r--    1 SChowdhu Administ      210 Apr 20  2015 hiera.yaml
+-rw-r--r--    1 SChowdhu Administ      291 Sep 30 08:52 r10k.yaml
 ```
 
 However if your host machine is a windows machine, then create folder "C:\vagrant-personal-files" and place the above files in there instead. 
+
+The "GitServerCertificates" folder should contain .pem files only, so that you can also do secure git clones inside your vm, i.e. "git clone https://..." as well as plain "git clone http://...". 
 
 
 
