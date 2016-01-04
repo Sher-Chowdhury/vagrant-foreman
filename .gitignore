@@ -4,6 +4,7 @@
 /personal-data/id_rsa
 /personal-data/id_rsa.pub
 /personal-data/r10k.yaml
+/personal-data/GitServerCertificates
 /packer_cache
 
 *.box
