@@ -37,6 +37,12 @@ echo "let g:syntastic_auto_loc_list = 1" >> ~/.vimrc
 echo "let g:syntastic_check_on_open = 1" >> ~/.vimrc
 echo "let g:syntastic_check_on_wq = 1" >> ~/.vimrc
 
+# http://vim.wikia.com/wiki/Indenting_source_code
+echo "set expandtab" >> ~/.vimrc
+echo "set shiftwidth=2" >> ~/.vimrc
+echo "softtabstop=2" >> ~/.vimrc
+# In vim, to automatically reindent, do "gg=G" while in vim's navigation mode. 
+
 
 echo 'PATH=$PATH:/home/vagrant/bin' >> /home/vagrant/.bashrc  # this is to get puppet lint to work. 
 

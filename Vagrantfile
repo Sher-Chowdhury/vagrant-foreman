@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
       vb.gui = true
       
       # For common vm settings, e.g. setting ram and cpu we use:
-      vb.memory = "2048"
+      vb.memory = "1024"
 	  vb.cpus = 2
 	  
 	  # adding a second hdd to my vm. 
