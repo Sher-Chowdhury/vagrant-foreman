@@ -60,10 +60,17 @@ Vagrant.configure(2) do |config|
       # name of machine that appears on the vb console and vb consoles title. 	  
 	  vb.name = "foreman-puppetmaster"    
     end
+
+	# Copy git server related .pem files from the host machine to the guest machine. this is to allow git clone commands to run using https links rather than http. 
+	puppetmaster_config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = "[ -d /c/vagrant-personal-files/GitServerCertificates ] && cp -rf /c/vagrant-personal-files/GitServerCertificates ./personal-data/GitServerCertificates"
+    end
+	puppetmaster_config.vm.provision "shell", path: "scripts/copy-GitServerCertificates-into-vm.sh"		
+
 #	puppetmaster_config.vm.provision "shell", path: "scripts/foreman/foreman-install.sh"
 	puppetmaster_config.vm.provision "shell", path: "foreman-scripts/master-puppet-run-setup.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-mcollective-client.sh"
-#	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
+	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 #	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"           # no longer using gerrit, so this is obselete
 #	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"   # no longer using gerrit, so this is obselete
 #	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"
@@ -96,12 +103,6 @@ Vagrant.configure(2) do |config|
     end
 	puppetmaster_config.vm.provision "shell", path: "scripts/copy-hiera-yaml-file-into-vm.sh"
 
-	# Copy git server related .pem files from the host machine to the guest machine. this is to allow git clone commands to run using https links rather than http. 
-	puppetmaster_config.vm.provision :host_shell do |host_shell|
-      host_shell.inline = "[ -d /c/vagrant-personal-files/GitServerCertificates ] && cp -rf /c/vagrant-personal-files/GitServerCertificates ./personal-data/GitServerCertificates"
-    end
-	puppetmaster_config.vm.provision "shell", path: "scripts/copy-GitServerCertificates-into-vm.sh"	
-	
 	
 	puppetmaster_config.vm.provision :reload   # this is because foreman's puppetssh feature requires a reboot in order for it to work. 
 	
