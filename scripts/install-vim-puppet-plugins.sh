@@ -40,7 +40,7 @@ echo "let g:syntastic_check_on_wq = 1" >> ~/.vimrc
 # http://vim.wikia.com/wiki/Indenting_source_code
 echo "set expandtab" >> ~/.vimrc
 echo "set shiftwidth=2" >> ~/.vimrc
-echo "softtabstop=2" >> ~/.vimrc
+echo "set softtabstop=2" >> ~/.vimrc
 # In vim, to automatically reindent, do "gg=G" while in vim's navigation mode. 
 
 
