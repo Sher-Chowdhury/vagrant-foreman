@@ -170,3 +170,7 @@ echo line164
 abrt-cli list
 [ `abrt-cli list | wc -l` -gt 0 ] && exit 1 
 echo line167
+
+echo "foreman installed, now about to do a reboot."
+reboot 
+sleep 120

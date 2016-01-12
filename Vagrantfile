@@ -70,7 +70,7 @@ Vagrant.configure(2) do |config|
 #	puppetmaster_config.vm.provision "shell", path: "scripts/foreman/foreman-install.sh"
 	puppetmaster_config.vm.provision "shell", path: "foreman-scripts/master-puppet-run-setup.sh"
 	puppetmaster_config.vm.provision "shell", path: "scripts/install-mcollective-client.sh"
-	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
+#	puppetmaster_config.vm.provision "shell", path: "scripts/install-gems.sh"
 #	puppetmaster_config.vm.provision "shell", path: "scripts/update-git.sh"           # no longer using gerrit, so this is obselete
 #	puppetmaster_config.vm.provision "shell", path: "scripts/install-git-review.sh"   # no longer using gerrit, so this is obselete
 #	puppetmaster_config.vm.provision "shell", path: "docker/install-docker.sh"

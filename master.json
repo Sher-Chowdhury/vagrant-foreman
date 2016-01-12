@@ -23,9 +23,27 @@
       "scripts": [ 
         "scripts/set-private-keys.sh",
         "scripts/foreman/install-foreman.sh"
-      ]
-    }
-    
+      ],
+      "start_retry_timeout": "5m",
+	  "pause_before": "120s"
+    },
+	{
+      "type": "shell",
+      "scripts": [ 
+        "scripts/install-gems.sh"
+      ],
+      "start_retry_timeout": "5m",
+	  "pause_before": "120s"	
+	},
+	{
+      "type": "shell",
+      "scripts": [ 
+        "scripts/update-git.sh"
+      ],
+      "start_retry_timeout": "5m",
+	  "pause_before": "120s"	
+	}
+	
   ],
 
   "post-processors": [{

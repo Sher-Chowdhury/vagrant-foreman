@@ -42,3 +42,7 @@ abrt-cli list
 
 systemctl enable NetworkManager 
 
+echo "rvm now setup, now about to do a reboot."
+reboot
+sleep 120
+
