@@ -13,7 +13,7 @@
 	  "boot_wait": "10s",
 	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/agent-ks67.cfg <enter>"	  ],
 	  "guest_additions_mode": "upload",
-      "shutdown_command": "shutdown now"
+      "shutdown_command": "halt -p"
     }
   ],
 
