@@ -1,0 +1,34 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "RedHat_64",
+      "iso_url": "http://mirror.ox.ac.uk/sites/mirror.centos.org/6.7/isos/x86_64/CentOS-6.7-x86_64-bin-DVD1.iso",
+      "iso_checksum": "c0c1a05d3d74fb093c6232003da4b22b0680f59d3b2fa2cb7da736bc40b3f2c5",
+      "iso_checksum_type": "sha256",
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+	  "http_directory": "kickstart",
+      "ssh_wait_timeout": "3000s",	  
+	  "boot_wait": "10s",
+	  "boot_command": [ "<tab>", " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/agent-ks.cfg <enter>"	  ],
+	  "guest_additions_mode": "upload",
+      "shutdown_command": "shutdown now"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [ 
+	    "scripts/set-private-keys.sh"		
+	  ]
+    }
+	
+  ],
+
+  "post-processors": [{
+    "type": "vagrant",
+    "output": "agent6.box"
+  }]
+}

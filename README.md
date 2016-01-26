@@ -76,17 +76,30 @@ cd into the project folder and run the following to create the 2 ".box"" files
 ```sh
 $ packer build master.json
 $ packer build agent.json
+$ packer build agent6.json     # useful if you want to build linux 6 puppet agent. 
 ```
 Each of the above commands will take about 40 minutes to complete, but depends on your machine specs and internet connections. 
 
 The Run the following:
 
 ```sh
-$ vagrant up
+$ vagrant up puppetmaster
 ``` 
 
+Next, you have a choice linux 6 and linux 7 puppet agents that you can start up. The following are Linux 7 machines:
 
 
+```sh
+$ vagrant up puppetagent01
+$ vagrant up puppetagent02
+``` 
+
+And here are the Linux 6 machines:
+
+```sh
+$ vagrant up puppetagent05
+$ vagrant up puppetagent06
+``` 
 
 
 ### Set up local rerouting if you are running vagrant on windows machine
@@ -96,6 +109,9 @@ Enter this in the windows hosts file (C:\Windows\System32\drivers\etc\hosts):
 ```
 192.168.50.10   puppetmaster puppetmaster.local
 192.168.50.11   puppetagent01 puppetagent01.local
+192.168.50.12   puppetagent02 puppetagent02.local
+192.168.50.15   puppetagent05 puppetagent05.local
+192.168.50.16   puppetagent06 puppetagent06.local
 ```
 
 
