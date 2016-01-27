@@ -9,6 +9,7 @@ you need to have the following installed on your host machine:
 * [packer](https://www.packer.io/)
 * [vagrant](https://www.vagrantup.com/)
 * [git-bash](https://msysgit.github.io/)
+* google chrome
 
 Once they are all installed, do the following:
 
@@ -129,7 +130,7 @@ username: root
 password: vagrant
 ```
 
-You can also open up your foreman server by going to https://puppetmaster.local/
+You can also open up your foreman server by going to https://puppetmaster.local/  (open this in google chrome)
 
 The admin login credentials to login in via the foreman web gui console is:
 
