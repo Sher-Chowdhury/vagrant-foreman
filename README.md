@@ -114,6 +114,30 @@ Enter this in the windows hosts file (C:\Windows\System32\drivers\etc\hosts):
 192.168.50.16   puppetagent06 puppetagent06.local
 ```
 
+### Login credentials
+you can ssh into all your machines using:
+
+```
+username: vagrant 
+password: vagrant
+```
+
+or:
+
+```
+username: root 
+password: vagrant
+```
+
+You can also open up your foreman server by going to https://puppetmaster.local/
+
+The admin login credentials to login in via the foreman web gui console is:
+
+```
+username: admin 
+password: password
+```
+
 
 ### Auto snapshots
 
