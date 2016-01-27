@@ -144,7 +144,7 @@ Vagrant.configure(2) do |config|
   ##  
   (5..6).each do |i|  
     config.vm.define "puppetagent0#{i}" do |puppetagent_config|
-      puppetagent_config.vm.box = "agent.box"
+      puppetagent_config.vm.box = "agent6.box"
       puppetagent_config.vm.hostname = "puppetagent0#{i}.local"  
       puppetagent_config.vm.network "private_network", ip: "192.168.50.1#{i}"  
       puppetagent_config.vm.provider "virtualbox" do |vb|
