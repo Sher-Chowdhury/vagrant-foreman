@@ -171,7 +171,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision :hosts do |provisioner|
     provisioner.add_host '192.168.50.10', ['puppetmaster', 'puppetmaster.local']  
     provisioner.add_host '192.168.50.11', ['puppetagent01', 'puppetagent01.local']
-    provisioner.add_host '192.168.50.12', ['puppetagent02', 'puppetagent02.local']	
+    provisioner.add_host '192.168.50.12', ['puppetagent02', 'puppetagent02.local']
+    provisioner.add_host '192.168.50.15', ['puppetagent05', 'puppetagent05.local']		
+    provisioner.add_host '192.168.50.16', ['puppetagent06', 'puppetagent06.local']	
   end
   
   config.vm.provision :host_shell do |host_shell|
@@ -185,5 +187,12 @@ Vagrant.configure(2) do |config|
   config.vm.provision :host_shell do |host_shell|
     host_shell.inline = 'hostfile=/c/Windows/System32/drivers/etc/hosts && grep -q 192.168.50.12 $hostfile || echo "192.168.50.12   puppetagent01 puppetagent02.local" >> $hostfile'
   end 
-  
+
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = 'hostfile=/c/Windows/System32/drivers/etc/hosts && grep -q 192.168.50.15 $hostfile || echo "192.168.50.15   puppetagent01 puppetagent05.local" >> $hostfile'
+  end 
+
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = 'hostfile=/c/Windows/System32/drivers/etc/hosts && grep -q 192.168.50.16 $hostfile || echo "192.168.50.16   puppetagent01 puppetagent06.local" >> $hostfile'
+  end   
 end
