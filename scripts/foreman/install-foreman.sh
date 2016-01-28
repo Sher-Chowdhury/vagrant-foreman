@@ -171,6 +171,8 @@ abrt-cli list
 [ `abrt-cli list | wc -l` -gt 0 ] && exit 1 
 echo line167
 
+puppet config set parser future --section all     # this only applies for puppet v3.0+. It is not required in puppet version 4+
+
 echo "foreman installed, now about to do a reboot."
 reboot 
 sleep 120
